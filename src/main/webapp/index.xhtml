@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="formulario"> 
+            <p:growl id="growl" life="2000" />
+
+            <p:commandButton id="btnCargar" value="Cargar excel" 
+                             update="growl transacciones departamentos propietarios cuentas propDeptos resumen btnCargar" 
+                             actionListener="#{mainMb.cargarExcel}" disabled="#{mainMb.cargarDis}"
+                             style="margin-right:20px;" styleClass="ui-priority-primary"  />
+
+            <p:panel header="Transacciones">
+                <p:dataTable id="transacciones" var="item" value="#{mainMb.transacciones}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.id}" /> 
+                    </p:column>
+
+                    <p:column headerText="Transaccion">
+                        <h:outputText value="#{item.transaccion}" />
+                    </p:column>
+
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{item.valor}" />
+                    </p:column>
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" />
+                    </f:facet>
+
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                    </f:facet>
+
+                </p:dataTable>
+            </p:panel>
+
+
+            <p:panel header="Departamento">
+                <p:dataTable id="departamentos" var="item" value="#{mainMb.departamentos}" >
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.id}" /> 
+                    </p:column>
+
+                    <p:column headerText="Referencia">
+                        <h:outputText value="#{item.referencia}" />
+                    </p:column>
+
+                    <p:column headerText="Manzana">
+                        <h:outputText value="#{item.manzana}" />
+                    </p:column>
+
+                    <p:column headerText="Departamento">
+                        <h:outputText value="#{item.departamento}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" />
+                    </f:facet>
+
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                    </f:facet>
+
+                </p:dataTable>
+            </p:panel>
+
+            <p:panel header="Propietarios">
+                <p:dataTable id="propietarios" var="item" value="#{mainMb.propietarios}" >
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.id}" /> 
+                    </p:column>
+
+                    <p:column headerText="Documento">
+                        <h:outputText value="#{item.documento}" />
+                    </p:column>
+
+                    <p:column headerText="Propietario">
+                        <h:outputText value="#{item.propietario}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" />
+                    </f:facet>
+
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                    </f:facet>
+
+                </p:dataTable>
+            </p:panel>        
+
+            <p:panel header="Cuentas">
+                <p:dataTable id="cuentas" var="item" value="#{mainMb.cuentas}" >
+
+
+
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.id}" /> 
+                    </p:column>
+
+                    <p:column headerText="departamento">
+                        <h:outputText value="#{item.departamento.id}" />
+                    </p:column>
+
+                    <p:column headerText="Cuenta">
+                        <h:outputText value="#{item.cuenta}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" />
+                    </f:facet>
+
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                    </f:facet>
+
+                </p:dataTable>
+            </p:panel>            
+
+
+            <p:panel header="Propietario - Departamento">
+                <p:dataTable id="propDeptos" var="item" value="#{mainMb.propDeptos}" 
+                             rowIndexVar="rowIndex">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{rowIndex+1}"/>
+                    </p:column>
+
+
+                    <p:column headerText="propietario">
+                        <h:outputText value="#{item.propietario}" />
+                    </p:column>
+
+                    <p:column headerText="departamento">
+                        <h:outputText value="#{item.departamento}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" />
+                    </f:facet>
+
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                    </f:facet>
+
+                </p:dataTable>
+            </p:panel>                        
+
+            <p:panel header="Resumen Transaccion">
+                <p:dataTable id="resumen" var="item" value="#{mainMb.resumenList}" 
+                             rowIndexVar="rowIndex">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{rowIndex+1}"/>
+                    </p:column>
+
+                    <p:column headerText="transaccion">
+                        <h:outputText value="#{item.transaccion}" />
+                    </p:column>
+
+                    <p:column headerText="valor">
+                        <h:outputText value="#{item.valor}" />
+                    </p:column>
+
+                    <p:column headerText="Departamento">
+                        <h:outputText value="#{item.departamento}" />
+                    </p:column>
+
+                    <p:column headerText="Asociación">
+                        <h:outputText value="#{item.asociacion}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="pi pi-refresh" />
+                    </f:facet>
+
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="pi pi-cloud-upload" />
+                    </f:facet>
+
+                </p:dataTable>
+            </p:panel>                        
+
+        </h:form>
+    </h:body>
+</html>
+
